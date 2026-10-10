@@ -1,0 +1,102 @@
+<!DOCTYPE html>.
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dev Mart | Diwali Spin & Win</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;
+  font-family:Arial,sans-serif;color:#fff8e8;
+  background:radial-gradient(circle at top,#592020,#180b18 75%);
+  display:flex;justify-content:center;align-items:center;
+  padding:20px
+}
+.card{
+  width:100%;max-width:440px;text-align:center;
+  padding:30px 22px;border:1px solid #d9ae53;
+  border-radius:24px;
+  background:rgba(32,12,25,.94);
+  box-shadow:0 15px 50px #0008
+}
+.brand{color:#ffd777;font-size:14px;letter-spacing:5px}
+h1{color:#ffcf66;font-size:32px;margin:14px 0 8px}
+p{line-height:1.6;color:#f5dfc0}
+.lamp{font-size:36px;margin:16px}
+input{
+  width:100%;padding:14px;margin:8px 0;
+  border:1px solid #d9ae53;border-radius:10px;
+  font-size:16px;background:#fffaf0;color:#251323
+}
+button{
+  width:100%;padding:14px;margin-top:12px;
+  border:0;border-radius:10px;
+  background:linear-gradient(90deg,#ffca55,#ff8d35);
+  color:#34151a;font-size:16px;font-weight:bold;
+  cursor:pointer
+}
+.note{font-size:12px;color:#d8c5b5}
+.wheel{
+  width:220px;height:220px;border-radius:50%;
+  margin:24px auto;border:7px solid #ffdb80;
+  background:conic-gradient(
+    #b51f35 0deg 45deg,#ffce61 45deg 90deg,
+    #217a52 90deg 135deg,#6e2ca0 135deg 180deg,
+    #b51f35 180deg 225deg,#ffce61 225deg 270deg,
+    #217a52 270deg 315deg,#6e2ca0 315deg 360deg);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 25px #ffbd4a66
+}
+.wheel span{
+  background:#fff1c9;color:#70212a;border-radius:50%;
+  padding:22px;font-weight:bold;border:4px solid #e6aa37
+}
+#message{min-height:24px;color:#ffda85}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="brand">DEV MART</div>
+  <div class="lamp">🪔 ✨ 🪔</div>
+  <h1>Diwali Spin & Win</h1>
+  <p>Celebrate Diwali with Dev Mart!<br>
+  Make your shopping extra special.</p>
+
+  <input id="mobile" type="tel" inputmode="numeric"
+    maxlength="10" placeholder="Enter your 10-digit mobile number"
+    aria-label="Mobile number">
+
+  <input id="billcode" type="text"
+    placeholder="Enter your bill eligibility code"
+    aria-label="Bill eligibility code">
+
+  <div class="wheel"><span>SPIN<br>& WIN</span></div>
+
+  <button id="spin" type="button">CONTINUE</button>
+  <p id="message" role="status"></p>
+  <p class="note">
+    Eligible bills: ₹1,000 or more. One spin per eligible bill.
+    Prize availability and redemption are subject to campaign terms.
+  </p>
+</main>
+<script>
+document.getElementById("spin").addEventListener("click",function(){
+  const mobile=document.getElementById("mobile").value.trim();
+  const code=document.getElementById("billcode").value.trim();
+  const message=document.getElementById("message");
+
+  if(!/^[6-9]\d{9}$/.test(mobile)){
+    message.textContent="Please enter a valid 10-digit Indian mobile number.";
+    return;
+  }
+  if(!code){
+    message.textContent="Please enter the eligibility code from the cashier.";
+    return;
+  }
+  message.textContent=
+    "Website preview only. Prize verification is not connected yet.";
+});
+</script>
+</body>
+</html>.
