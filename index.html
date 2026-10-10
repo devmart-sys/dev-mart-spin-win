@@ -38,6 +38,7 @@ button{
 }
 .note{font-size:12px;color:#d8c5b5}
 .wheel{
+  transition: transform 4s cubic-bezier(0.15, 0.65, 0.15, 1);
   width:220px;height:220px;border-radius:50%;
   margin:24px auto;border:7px solid #ffdb80;
   background:conic-gradient(
@@ -94,8 +95,11 @@ document.getElementById("spin").addEventListener("click",function(){
     message.textContent="Please enter the eligibility code from the cashier.";
     return;
   }
-  message.textContent=
-    "Bill number received. Verification is skipped for now. Spin feature is being set up.";
+const wheel = document.querySelector(".wheel");
+const prizes = ["5% OFF", "10% OFF", "15% OFF", "Special Gift", "Better Luck Next Time"];
+const prize = prizes[Math.floor(Math.random() * prizes.length)];
+wheel.style.transform = "rotate(" + (1440 + Math.floor(Math.random() * 360)) + "deg)";
+message.textContent = "Demo result: " + prize + ". Not a confirmed or redeemable prize.";
 });
 </script>
 </body>
