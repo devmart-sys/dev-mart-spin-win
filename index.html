@@ -82,24 +82,61 @@ button{
   </p>
 </main>
 <script>
-document.getElementById("spin").addEventListener("click",function(){
-  const mobile=document.getElementById("mobile").value.trim();
-  const code=document.getElementById("billcode").value.trim();
-  const message=document.getElementById("message");
+const API_URL = "https://dev-mart-bill-api.devestablishment.workers.dev";
 
-  if(!/^[6-9]\d{9}$/.test(mobile)){
-    message.textContent="Please enter a valid 10-digit Indian mobile number.";
+document.getElementById("spin").addEventListener("click", async function () {
+  const mobile = document.getElementById("mobile").value.trim();
+  const code = document.getElementById("billcode").value.trim();
+  const message = document.getElementById("message");
+  const button = document.getElementById("spin");
+  const wheel = document.querySelector(".wheel");
+
+  if (!/^[6-9]\d{9}$/.test(mobile)) {
+    message.textContent = "Please enter a valid 10-digit Indian mobile number.";
     return;
   }
-  if(!code){
-    message.textContent="Please enter the eligibility code from the cashier.";
+
+  if (!code) {
+    message.textContent = "Please enter your bill eligibility code.";
     return;
   }
-const wheel = document.querySelector(".wheel");
-const prizes = ["5% OFF", "10% OFF", "15% OFF", "Special Gift", "Better Luck Next Time"];
-const prize = prizes[Math.floor(Math.random() * prizes.length)];
-wheel.style.transform = "rotate(" + (1440 + Math.floor(Math.random() * 360)) + "deg)";
-message.textContent = "Demo result: " + prize + ". Not a confirmed or redeemable prize.";
+
+  button.disabled = true;
+  message.textContent = "Verifying your bill and selecting your prize...";
+  wheel.style.transition = "none";
+  wheel.style.transform = "rotate(0deg)";
+  void wheel.offsetWidth;
+  wheel.style.transition = "transform 4s cubic-bezier(0.15, 0.65, 0.15, 1)";
+
+  try {
+    const response = await fetch(API_URL + "/spin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        billCode: code,
+        mobile: mobile
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok || !data.ok) {
+      message.textContent = data.error || "Unable to complete your spin.";
+      return;
+    }
+
+    wheel.style.transform =
+      "rotate(" + (1440 + Math.floor(Math.random() * 360)) + "deg)";
+
+    message.textContent = "Your server-selected prize: " + data.prize;
+  } catch (error) {
+    message.textContent =
+      "Unable to connect. Please try again or ask the cashier for help.";
+  } finally {
+    button.disabled = false;
+  }
 });
 </script>
 </body>
