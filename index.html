@@ -130,7 +130,7 @@ document.getElementById("spin").addEventListener("click", async function () {
     wheel.style.transform =
       "rotate(" + (1440 + Math.floor(Math.random() * 360)) + "deg)";
 
-    message.textContent = "Your server-selected prize: " + data.prize;
+    message.textContent = "🎉 Congratulations! You won: " + data.prize;
   } catch (error) {
     message.textContent =
       "Unable to connect. Please try again or ask the cashier for help.";
