@@ -273,19 +273,33 @@ function winSound(){
 }
 
 
+
 function confettiBurst(){
   effects.innerHTML="";
-  const colors=["#ffd777","#ff5b55","#fff0a8","#7ee0a4","#d8a0ff"];
-  for(let i=0;i<100;i++){
+
+  const colors=[
+    "#ffd777","#ff5b55","#fff0a8",
+    "#7ee0a4","#d8a0ff","#ffffff"
+  ];
+
+  // Festive confetti burst
+  for(let i=0;i<140;i++){
     const piece=document.createElement("i");
     piece.className="confetti";
     piece.style.left=Math.random()*100+"%";
     piece.style.background=colors[i%colors.length];
-    piece.style.setProperty("--dur",(2+Math.random()*2.5)+"s");
-    piece.style.setProperty("--drift",((Math.random()-.5)*180)+"px");
-    piece.style.animationDelay=(Math.random()*.7)+"s";
+    piece.style.width=(5+Math.random()*6)+"px";
+    piece.style.height=(8+Math.random()*10)+"px";
+    piece.style.setProperty(
+      "--dur",(2+Math.random()*2.5)+"s"
+    );
+    piece.style.setProperty(
+      "--drift",((Math.random()-.5)*220)+"px"
+    );
+    piece.style.animationDelay=(Math.random()*.5)+"s";
     effects.appendChild(piece);
   }
+
   setTimeout(()=>effects.replaceChildren(),5500);
 }
 
