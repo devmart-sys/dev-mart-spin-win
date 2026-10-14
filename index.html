@@ -115,16 +115,27 @@ button:disabled{opacity:.55;cursor:wait}
   pointer-events:none;
 }
 
+
 .wheel-label{
-  position:absolute;left:50%;top:50%;
-  width:76px;font-size:12px;line-height:1.15;
-  font-weight:bold;text-align:center;color:white;
-  text-shadow:0 1px 3px #000;
-  transform:translate(-50%,-50%) rotate(var(--a))
-    translateY(calc(min(38vw,145px) * -.34))
-    rotate(calc(var(--a) * -1));
+  position:absolute;
+  width:64px;
+  min-height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-size:12px;
+  line-height:1.15;
+  font-weight:900;
+  letter-spacing:.2px;
+  color:#fffdf4;
+  text-shadow:0 2px 3px #1b0718, 0 0 5px #1b0718;
+  transform:translate(-50%,-50%);
   pointer-events:none;
+  overflow-wrap:break-word;
+  z-index:1;
 }
+
 
 .hub{
   position:absolute;z-index:1;left:50%;top:50%;
@@ -177,12 +188,12 @@ button:disabled{opacity:.55;cursor:wait}
   <div class="pointer"></div>
   <div class="wheel-wrap">
     <div class="wheel" id="wheel">
-      <span class="wheel-label" style="--a:30deg">Special<br>Gift</span>
-      <span class="wheel-label" style="--a:90deg">5%<br>OFF</span>
-      <span class="wheel-label" style="--a:150deg">10%<br>OFF</span>
-      <span class="wheel-label" style="--a:210deg">15%<br>OFF</span>
-      <span class="wheel-label" style="--a:270deg">Free<br>Product</span>
-      <span class="wheel-label" style="--a:330deg">Better Luck<br>Next Time</span>
+<span class="wheel-label" style="left:66%;top:25%">SPECIAL<br>GIFT</span>
+<span class="wheel-label" style="left:76%;top:50%">5%<br>OFF</span>
+<span class="wheel-label" style="left:66%;top:75%">10%<br>OFF</span>
+<span class="wheel-label" style="left:34%;top:75%">15%<br>OFF</span>
+<span class="wheel-label" style="left:24%;top:50%">FREE<br>PRODUCT</span>
+<span class="wheel-label" style="left:34%;top:25%">BETTER LUCK<br>NEXT TIME</span>
     </div>
     <div class="hub">SPIN<br>& WIN</div>
   </div>
