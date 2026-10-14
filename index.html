@@ -301,6 +301,47 @@ function confettiBurst(){
   }
 
   setTimeout(()=>effects.replaceChildren(),5500);
+
+function fireworksBurst(){
+  const colors=["#ffd777","#ff5b55","#fff0a8","#7ee0a4","#d8a0ff"];
+
+  for(let burst=0;burst<5;burst++){
+    setTimeout(()=>{
+      const x=15+Math.random()*70;
+      const y=15+Math.random()*45;
+
+      for(let i=0;i<22;i++){
+        const spark=document.createElement("i");
+        const angle=(Math.PI*2*i)/22;
+        const distance=35+Math.random()*65;
+
+        spark.style.cssText=
+          "position:absolute;left:"+x+"%;top:"+y+"%;"+
+          "width:5px;height:5px;border-radius:50%;"+
+          "background:"+colors[Math.floor(Math.random()*colors.length)]+
+          ";box-shadow:0 0 8px currentColor;";
+
+        effects.appendChild(spark);
+
+        spark.animate([
+          {transform:"translate(0,0) scale(1)",opacity:1},
+          {
+            transform:"translate("+
+              Math.cos(angle)*distance+"px,"+
+              Math.sin(angle)*distance+"px) scale(0.2)",
+            opacity:0
+          }
+        ],{
+          duration:900+Math.random()*500,
+          easing:"ease-out",
+          fill:"forwards"
+        });
+
+        setTimeout(()=>spark.remove(),1500);
+      }
+    },burst*350);
+  }
+}
 }
 
 function prizeIndex(prize){
@@ -333,10 +374,13 @@ function finishSpin(prize){
       ?"🍀 Better Luck Next Time! Thank you for shopping with Dev Mart."
       :"🎉 Congratulations! You won: "+prize;
 
-    if(!isNoWin){
-      confettiBurst();
-      winSound();
-    }
+ 
+if(!isNoWin){
+  confettiBurst();
+  fireworksBurst();
+  winSound();
+}
+
     busy=false;
     button.disabled=false;
     button.textContent="CONTINUE";
