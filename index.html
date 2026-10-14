@@ -253,15 +253,25 @@ function tone(freq,duration,type="sine",volume=.045,delay=0){
   osc.stop(ctx.currentTime+delay+duration+.03);
 }
 
+
 function spinSound(){
-  for(let i=0;i<12;i++){
-    tone(420+(i%3)*100,.07,"triangle",.025,i*.22);
+  if(!soundToggle.checked) return;
+
+  for(let i=0;i<18;i++){
+    const delay=i*0.16;
+    const frequency=420+(i%4)*85;
+    tone(frequency,0.065,"triangle",0.035,delay);
   }
 }
 
 function winSound(){
-  [523,659,784,1047].forEach((n,i)=>tone(n,.42,"sine",.07,i*.14));
+  if(!soundToggle.checked) return;
+
+  [523,659,784,1047,784,1047].forEach((frequency,i)=>{
+    tone(frequency,0.32,"sine",0.065,i*0.13);
+  });
 }
+
 
 function confettiBurst(){
   effects.innerHTML="";
