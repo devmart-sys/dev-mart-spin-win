@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,16 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#581515">
   <title>Dev Mart | Diwali Spin & Win</title>
-
   <style>
     :root {
       --maroon: #581515;
       --gold: #f5c451;
       --cream: #fff8e8;
     }
-
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       min-height: 100vh;
@@ -25,342 +21,175 @@
       align-items: center;
       font-family: Arial, sans-serif;
       color: var(--cream);
-      background:
-        radial-gradient(ellipse at top, #982e20, transparent 60%),
-        linear-gradient(145deg, #300912, #701719, #300912);
+      background: radial-gradient(ellipse at top, #982e20, transparent 60%),
+                  linear-gradient(145deg, #300912, #701719, #300912);
     }
-
     #celebrationCanvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 20;
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 20;
     }
-
-    .page {
-      width: 100%;
-      max-width: 440px;
-      text-align: center;
-    }
-
+    .page { width: 100%; max-width: 440px; text-align: center; }
     .brand {
-      color: var(--gold);
-      font-size: 31px;
-      font-weight: 900;
-      letter-spacing: 5px;
-      margin: 8px;
+      color: var(--gold); font-size: 31px; font-weight: 900;
+      letter-spacing: 5px; margin: 8px;
     }
-
     .festival {
-      font-size: 12px;
-      letter-spacing: 3px;
-      color: #ffe5a3;
+      font-size: 12px; letter-spacing: 3px; color: #ffe5a3;
       margin-bottom: 16px;
     }
-
-    .card {
-      background: #310b12e8;
-      border: 1px solid #d9a73e;
-      border-radius: 22px;
-      padding: 22px 18px;
+    .card, .terms-card {
+      background: #310b12e8; border: 1px solid #d9a73e;
       box-shadow: 0 15px 45px #16030688;
     }
-
-    h1 {
-      color: var(--gold);
-      font-size: 28px;
-      margin: 0 0 8px;
-    }
-
+    .card { border-radius: 22px; padding: 22px 18px; }
+    h1 { color: var(--gold); font-size: 28px; margin: 0 0 8px; }
     .subtitle {
-      color: #f7dfc4;
-      font-size: 14px;
-      line-height: 1.5;
+      color: #f7dfc4; font-size: 14px; line-height: 1.5;
       margin-bottom: 20px;
     }
-
     label {
-      display: block;
-      text-align: left;
-      margin: 13px 0 7px;
-      font-size: 13px;
-      font-weight: bold;
-      color: #ffe7b2;
+      display: block; text-align: left; margin: 13px 0 7px;
+      font-size: 13px; font-weight: bold; color: #ffe7b2;
     }
-
     input {
-      width: 100%;
-      padding: 14px;
-      border-radius: 10px;
-      border: 1px solid #d6b36b;
-      background: #fffaf0;
-      color: #28100d;
-      font-size: 16px;
+      width: 100%; padding: 14px; border-radius: 10px;
+      border: 1px solid #d6b36b; background: #fffaf0;
+      color: #28100d; font-size: 16px;
     }
-
-    input:focus {
-      outline: 2px solid var(--gold);
-    }
-
+    input:focus { outline: 2px solid var(--gold); }
     .wheel-wrap {
-      position: relative;
-      width: min(72vw, 270px);
-      aspect-ratio: 1;
-      margin: 25px auto 20px;
+      position: relative; width: min(72vw, 270px);
+      aspect-ratio: 1; margin: 25px auto 20px;
     }
-
     .pointer {
-      position: absolute;
-      top: -7px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 4;
-      width: 0;
-      height: 0;
+      position: absolute; top: -7px; left: 50%;
+      transform: translateX(-50%); z-index: 4; width: 0; height: 0;
       border-left: 17px solid transparent;
       border-right: 17px solid transparent;
       border-top: 32px solid #fff0b2;
       filter: drop-shadow(0 2px 2px #000);
     }
-
     .wheel {
-      position: absolute;
-      inset: 0;
-      border: 7px solid var(--gold);
+      position: absolute; inset: 0; border: 7px solid var(--gold);
       border-radius: 50%;
       background: conic-gradient(
-        #e0a52e 0deg 45deg,
-        #a42a25 45deg 90deg,
-        #17754a 90deg 135deg,
-        #6c2a83 135deg 180deg,
-        #e0a52e 180deg 225deg,
-        #a42a25 225deg 270deg,
-        #17754a 270deg 315deg,
-        #6c2a83 315deg 360deg
+        #e0a52e 0deg 60deg,
+        #a42a25 60deg 120deg,
+        #17754a 120deg 180deg,
+        #6c2a83 180deg 240deg,
+        #e0a52e 240deg 300deg,
+        #a42a25 300deg 360deg
       );
       box-shadow: 0 0 0 4px #6b3717, 0 0 25px #f5c45166;
       transition: transform 4.2s cubic-bezier(.12,.68,.12,1);
       overflow: hidden;
     }
-
     .wheel::before {
-      content: "";
-      position: absolute;
-      inset: 0;
+      content: ""; position: absolute; inset: 0;
       background: repeating-conic-gradient(
-        transparent 0deg 44deg,
-        #fff4cf 44deg 45deg
+        transparent 0deg 59deg, #fff4cf 59deg 60deg
       );
     }
-
     .wheel-text {
-      position: absolute;
-      inset: 0;
-      color: white;
-      font-size: 13px;
-      font-weight: 900;
-      text-shadow: 0 1px 4px #000;
+      position: absolute; inset: 0; color: white;
+      font-size: 11px; font-weight: 900; text-shadow: 0 1px 4px #000;
     }
-
     .wheel-text span {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 65px;
-      margin: -9px 0 0 -32px;
-      transform:
-        rotate(var(--angle))
-        translateY(-83px)
-        rotate(calc(-1 * var(--angle)));
+      position: absolute; top: 50%; left: 50%; width: 78px;
+      margin: -8px 0 0 -39px; text-align: center; line-height: 1.15;
+      overflow-wrap: anywhere;
+      transform: rotate(var(--angle)) translateY(-77px)
+                 rotate(calc(-1 * var(--angle)));
     }
-
     .wheel-center {
-      position: absolute;
-      z-index: 3;
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
-      top: 50%;
-      left: 50%;
+      position: absolute; z-index: 3; width: 65px; height: 65px;
+      border-radius: 50%; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       background: radial-gradient(circle, #fff4c6, #d69a23);
-      border: 4px solid #fff0b2;
-      color: #581515;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 12px;
-      box-shadow: 0 3px 10px #0008;
+      border: 4px solid #fff0b2; color: #581515;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 12px; box-shadow: 0 3px 10px #0008;
     }
-
     button {
-      width: 100%;
-      border: 0;
-      border-radius: 12px;
-      padding: 15px;
-      font-size: 16px;
-      font-weight: 900;
-      cursor: pointer;
+      width: 100%; border: 0; border-radius: 12px; padding: 15px;
+      font-size: 16px; font-weight: 900; cursor: pointer;
       color: #48100d;
       background: linear-gradient(100deg, #f9d978, #e8a92b);
       box-shadow: 0 4px 0 #9e6417;
     }
-
-    button:disabled {
-      opacity: .65;
-      cursor: not-allowed;
-    }
-
+    button:disabled { opacity: .65; cursor: not-allowed; }
     .message {
-      display: none;
-      margin-top: 18px;
-      border-radius: 12px;
-      padding: 14px;
-      line-height: 1.5;
-      overflow-wrap: anywhere;
+      display: none; margin-top: 18px; border-radius: 12px;
+      padding: 14px; line-height: 1.5; overflow-wrap: anywhere;
     }
-
     .message.error {
-      display: block;
-      background: #fff0e9;
-      color: #791d14;
+      display: block; background: #fff0e9; color: #791d14;
       border: 2px solid #e5a18f;
     }
-
     .small {
-      font-size: 11px;
-      color: #e8cdb6;
-      margin-top: 17px;
-      line-height: 1.5;
+      font-size: 11px; color: #e8cdb6; margin-top: 17px; line-height: 1.5;
     }
-
     .footer {
-      color: #f4d6a0;
-      font-size: 12px;
-      margin-top: 17px;
-      letter-spacing: 1px;
+      color: #f4d6a0; font-size: 12px; margin-top: 17px; letter-spacing: 1px;
     }
-
-    /* Prize reveal */
+    .terms-card {
+      margin-top: 16px; text-align: left; border-radius: 18px;
+      padding: 16px 18px; color: #fff3d8;
+      box-shadow: 0 10px 28px #16030655;
+    }
+    .terms-card h2 {
+      margin: 0 0 10px; text-align: center; color: var(--gold); font-size: 17px;
+    }
+    .terms-card ol { margin: 0; padding-left: 20px; font-size: 12px; line-height: 1.55; }
+    .terms-card li { margin: 7px 0; }
     .modal {
-      position: fixed;
-      inset: 0;
-      z-index: 30;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: #170309e8;
-      backdrop-filter: blur(5px);
+      position: fixed; inset: 0; z-index: 30; display: none;
+      align-items: center; justify-content: center; padding: 20px;
+      background: #170309e8; backdrop-filter: blur(5px);
     }
-
-    .modal.show {
-      display: flex;
-      animation: fadeIn .35s ease;
-    }
-
+    .modal.show { display: flex; animation: fadeIn .35s ease; }
     .prize-card {
-      position: relative;
-      width: 100%;
-      max-width: 380px;
-      overflow: hidden;
-      padding: 30px 22px 25px;
-      border: 3px solid #ffe08a;
-      border-radius: 25px;
-      color: #4b160d;
-      text-align: center;
+      position: relative; width: 100%; max-width: 380px; overflow: hidden;
+      padding: 30px 22px 25px; border: 3px solid #ffe08a;
+      border-radius: 25px; color: #4b160d; text-align: center;
       background: linear-gradient(150deg, #fff7d5, #f5c451, #fff0b3);
       box-shadow: 0 0 35px #ffcb4c88, 0 0 100px #ffab2680;
       animation: prizePop .7s cubic-bezier(.18,.89,.32,1.28);
     }
-
     .prize-card::before {
-      content: "";
-      position: absolute;
-      width: 200%;
-      height: 120px;
-      top: 20%;
-      left: -50%;
-      background: linear-gradient(
-        transparent,
-        #ffffff66,
-        transparent
-      );
-      transform: rotate(-25deg);
-      animation: shine 2.5s linear infinite;
+      content: ""; position: absolute; width: 200%; height: 120px;
+      top: 20%; left: -50%;
+      background: linear-gradient(transparent, #ffffff66, transparent);
+      transform: rotate(-25deg); animation: shine 2.5s linear infinite;
       pointer-events: none;
     }
-
-    .trophy {
-      font-size: 65px;
-      animation: trophyBounce 1s ease infinite alternate;
-    }
-
-    .congrats {
-      font-size: 26px;
-      font-weight: 1000;
-      margin: 8px 0;
-    }
-
-    .prize-label {
-      font-size: 13px;
-      font-weight: bold;
-      letter-spacing: 3px;
-      margin-top: 18px;
-    }
-
+    .trophy { font-size: 65px; animation: trophyBounce 1s ease infinite alternate; }
+    .congrats { font-size: 26px; font-weight: 1000; margin: 8px 0; }
+    .prize-label { font-size: 13px; font-weight: bold; letter-spacing: 3px; margin-top: 18px; }
     .prize-name {
-      position: relative;
-      font-size: clamp(25px, 7vw, 36px);
-      font-weight: 1000;
-      line-height: 1.2;
-      margin: 10px 0 18px;
+      position: relative; font-size: clamp(25px, 7vw, 36px);
+      font-weight: 1000; line-height: 1.2; margin: 10px 0 18px;
       overflow-wrap: anywhere;
     }
-
-    .winner-detail {
-      font-size: 13px;
-      line-height: 1.7;
-      overflow-wrap: anywhere;
-    }
-
+    .winner-detail { font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; }
     .claim-note {
-      margin: 16px 0;
-      padding: 10px;
-      background: #ffffff80;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: bold;
+      margin: 16px 0; padding: 10px; background: #ffffff80;
+      border-radius: 10px; font-size: 13px; font-weight: bold;
     }
-
-    .modal button {
-      position: relative;
-      box-shadow: 0 4px 0 #956014;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
+    .modal button { position: relative; box-shadow: 0 4px 0 #956014; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes prizePop {
       from { opacity: 0; transform: scale(.55) rotate(-5deg); }
       to { opacity: 1; transform: scale(1) rotate(0); }
     }
-
     @keyframes trophyBounce {
       from { transform: translateY(0) rotate(-5deg); }
       to { transform: translateY(-8px) rotate(5deg); }
     }
-
     @keyframes shine {
       from { transform: translateX(-80%) rotate(-25deg); }
       to { transform: translateX(80%) rotate(-25deg); }
     }
-
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: .01ms !important;
@@ -369,111 +198,78 @@
     }
   </style>
 </head>
-
 <body>
   <canvas id="celebrationCanvas" aria-hidden="true"></canvas>
-
   <main class="page">
     <div class="brand">DEV MART</div>
     <div class="festival">DIWALI SPECIAL CELEBRATION</div>
-
     <section class="card">
-      <h1>SPIN & WIN!</h1>
-      <p class="subtitle">
-        Your shopping could bring you a festive surprise!
-        Enter your details and try your luck.
-      </p>
-
+      <h1>SPIN &amp; WIN!</h1>
+      <p class="subtitle">Your shopping could bring you a festive surprise! Enter your details and try your luck.</p>
       <form id="spinForm">
         <label for="phoneNumber">Mobile Number</label>
-        <input
-          id="phoneNumber"
-          name="phoneNumber"
-          type="tel"
-          inputmode="numeric"
-          autocomplete="tel-national"
-          maxlength="10"
-          pattern="[6-9][0-9]{9}"
-          placeholder="Enter 10-digit mobile number"
-          required
-        >
-
+        <input id="phoneNumber" name="phoneNumber" type="tel"
+          inputmode="numeric" autocomplete="tel-national" maxlength="10"
+          pattern="[6-9][0-9]{9}" placeholder="Enter 10-digit mobile number" required>
         <label for="eligibilityCode">Eligibility Code</label>
-        <input
-          id="eligibilityCode"
-          name="eligibilityCode"
-          type="text"
-          maxlength="7"
-          pattern="DMFS[0-9]{3}"
-          placeholder="Example: DMFS001"
-          autocapitalize="characters"
-          autocomplete="off"
-          required
-        >
-
+        <input id="eligibilityCode" name="eligibilityCode" type="text"
+          maxlength="7" pattern="DMFS[0-9]{3}" placeholder="Example: DMFS001"
+          autocapitalize="characters" autocomplete="off" required>
         <div class="wheel-wrap">
           <div class="pointer"></div>
           <div class="wheel" id="wheel">
             <div class="wheel-text">
-              <span style="--angle:22.5deg">GIFT</span>
-              <span style="--angle:67.5deg">WIN</span>
-              <span style="--angle:112.5deg">LUCKY</span>
-              <span style="--angle:157.5deg">PRIZE</span>
-              <span style="--angle:202.5deg">GIFT</span>
-              <span style="--angle:247.5deg">WIN</span>
-              <span style="--angle:292.5deg">LUCKY</span>
-              <span style="--angle:337.5deg">PRIZE</span>
+              <span style="--angle:30deg">10% OFF</span>
+              <span style="--angle:90deg">15% OFF</span>
+              <span style="--angle:150deg">5% OFF</span>
+              <span style="--angle:210deg">FREE PRODUCT</span>
+              <span style="--angle:270deg">SPECIAL GIFT</span>
+              <span style="--angle:330deg">BETTER LUCK NEXT TIME</span>
             </div>
           </div>
           <div class="wheel-center">SPIN!</div>
         </div>
-
         <button type="submit" id="spinButton">🎁 TRY YOUR LUCK!</button>
       </form>
-
       <div id="message" class="message" role="status" aria-live="polite"></div>
-
-      <p class="small">
-        Each eligibility code can be used only once.
-        Please show your winning result to the cashier.
-      </p>
+      <p class="small">Each eligibility code can be used only once. Please show your winning result to the cashier.</p>
     </section>
 
+    <section class="terms-card" aria-labelledby="termsHeading">
+      <h2 id="termsHeading">TERMS &amp; CONDITIONS</h2>
+      <ol>
+        <li>Valid only on bills of ₹1,000 or more.</li>
+        <li>Each customer may participate only once during the campaign.</li>
+        <li>A valid mobile number and eligibility code issued by Dev Mart are required.</li>
+        <li>Prizes are subject to availability and campaign prize limits.</li>
+        <li>Prizes cannot be exchanged for cash.</li>
+        <li>Spin &amp; Win rewards cannot be combined with any other offer, discount, promotion, or previously redeemed reward code.</li>
+        <li>Dev Mart reserves the right to amend these terms or modify, suspend, or withdraw the campaign without prior notice, subject to applicable law.</li>
+        <li>Duplicate entries, reused codes, or fraudulent participation may be disqualified.</li>
+        <li>Participation in the campaign constitutes acceptance of these Terms &amp; Conditions.</li>
+      </ol>
+    </section>
     <p class="footer">HAPPY DIWALI • SHOP • SPIN • WIN</p>
   </main>
 
-  <section
-    id="prizeModal"
-    class="modal"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="congratsTitle"
-  >
+  <section id="prizeModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="congratsTitle">
     <div class="prize-card">
       <div class="trophy">🏆</div>
       <div class="congrats" id="congratsTitle">🎉 CONGRATULATIONS! 🎉</div>
       <div>You are a Dev Mart lucky winner!</div>
-
       <div class="prize-label">YOU HAVE WON</div>
       <div class="prize-name" id="prizeName">YOUR PRIZE</div>
-
       <div class="winner-detail">
         Eligibility code: <strong id="winnerCode"></strong><br>
         Mobile number: <strong id="winnerPhone"></strong>
       </div>
-
-      <div class="claim-note">
-        📣 Show this screen to the cashier to record your prize.
-      </div>
-
+      <div class="claim-note">📣 Show this screen to the cashier to record your prize.</div>
       <button type="button" id="closeModal">CONTINUE CELEBRATING ✨</button>
     </div>
   </section>
 
   <script>
-    const API_URL =
-      "https://dev-mart-bill-api.devestablishment.workers.dev";
-
+    const API_URL = "https://dev-mart-bill-api.devestablishment.workers.dev";
     const form = document.getElementById("spinForm");
     const phoneInput = document.getElementById("phoneNumber");
     const codeInput = document.getElementById("eligibilityCode");
@@ -484,16 +280,10 @@
     const canvas = document.getElementById("celebrationCanvas");
     const ctx = canvas.getContext("2d");
 
-    let spinning = false;
-    let rotation = 0;
-    let audioContext = null;
-    let spinSoundTimer = null;
-    let celebrationRunning = false;
-    let particles = [];
-    let fireworks = [];
-    let animationFrame = null;
+    let spinning = false, rotation = 0, audioContext = null;
+    let spinSoundTimer = null, celebrationRunning = false;
+    let particles = [], fireworks = [], animationFrame = null;
 
-    // Resize the celebration canvas to match the screen.
     function resizeCanvas() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.floor(window.innerWidth * dpr);
@@ -502,39 +292,26 @@
       canvas.style.height = window.innerHeight + "px";
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
-
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
 
-    // Browser-generated sounds: no external sound files required.
     async function prepareAudio() {
       const AudioCtor = window.AudioContext || window.webkitAudioContext;
       if (!AudioCtor) return false;
-
       if (!audioContext) audioContext = new AudioCtor();
-      if (audioContext.state === "suspended") {
-        await audioContext.resume();
-      }
-
+      if (audioContext.state === "suspended") await audioContext.resume();
       return audioContext.state === "running";
     }
 
     function tone(frequency, start, duration, volume, type = "sine") {
       if (!audioContext || audioContext.state !== "running") return;
-
       const oscillator = audioContext.createOscillator();
       const gain = audioContext.createGain();
-
       oscillator.type = type;
       oscillator.frequency.setValueAtTime(frequency, start);
       gain.gain.setValueAtTime(0.0001, start);
-      gain.gain.exponentialRampToValueAtTime(
-        Math.max(volume, 0.0002), start + 0.02
-      );
-      gain.gain.exponentialRampToValueAtTime(
-        0.0001, start + duration
-      );
-
+      gain.gain.exponentialRampToValueAtTime(Math.max(volume, 0.0002), start + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
       oscillator.connect(gain);
       gain.connect(audioContext.destination);
       oscillator.start(start);
@@ -543,217 +320,135 @@
 
     function playSpinSound() {
       if (!audioContext || audioContext.state !== "running") return;
-
       const now = audioContext.currentTime;
-      // A short rising sequence gives the wheel a playful spinning sound.
       for (let i = 0; i < 12; i++) {
-        const time = now + i * 0.16;
-        const frequency = 240 + i * 28;
-        tone(frequency, time, 0.09, 0.045, "triangle");
+        tone(240 + i * 28, now + i * 0.16, 0.09, 0.045, "triangle");
       }
     }
-
     function startSpinSound() {
       playSpinSound();
       spinSoundTimer = setInterval(playSpinSound, 1450);
     }
-
     function stopSpinSound() {
       if (spinSoundTimer) clearInterval(spinSoundTimer);
       spinSoundTimer = null;
     }
-
     function playWinningJingle() {
       if (!audioContext || audioContext.state !== "running") return;
-
       const now = audioContext.currentTime + 0.05;
-      const notes = [
-        [523.25, 0.00],
-        [659.25, 0.16],
-        [783.99, 0.32],
-        [1046.50, 0.52],
-        [783.99, 0.78],
-        [1046.50, 0.98],
-        [1318.51, 1.22]
-      ];
-
+      const notes = [[523.25,0],[659.25,.16],[783.99,.32],[1046.5,.52],
+                     [783.99,.78],[1046.5,.98],[1318.51,1.22]];
       for (const [frequency, offset] of notes) {
-        tone(frequency, now + offset, 0.34, 0.10, "sine");
-        tone(frequency * 2, now + offset, 0.20, 0.025, "triangle");
+        tone(frequency, now + offset, .34, .10, "sine");
+        tone(frequency * 2, now + offset, .20, .025, "triangle");
       }
     }
-
     function playFireworkSound() {
       if (!audioContext || audioContext.state !== "running") return;
-
       const now = audioContext.currentTime;
-      tone(880, now, 0.10, 0.025, "triangle");
-      tone(1174.66, now + 0.10, 0.12, 0.035, "triangle");
-      tone(1567.98, now + 0.22, 0.22, 0.04, "sine");
+      tone(880, now, .10, .025, "triangle");
+      tone(1174.66, now + .10, .12, .035, "triangle");
+      tone(1567.98, now + .22, .22, .04, "sine");
     }
 
     codeInput.addEventListener("input", () => {
       codeInput.value = codeInput.value.toUpperCase().replace(/\s/g, "");
     });
-
     phoneInput.addEventListener("input", () => {
       phoneInput.value = phoneInput.value.replace(/\D/g, "").slice(0, 10);
     });
-
     function showError(text) {
       message.className = "message error";
       message.textContent = text;
     }
 
-    // Confetti particles.
     function burstConfetti(x, y, amount = 90) {
       for (let i = 0; i < amount; i++) {
         const angle = Math.random() * Math.PI * 2;
         const speed = 2 + Math.random() * 7;
-
         particles.push({
-          x, y,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed - 2,
-          gravity: 0.10 + Math.random() * 0.10,
-          size: 3 + Math.random() * 6,
-          rotation: Math.random() * 6,
-          spin: (Math.random() - 0.5) * 0.3,
+          x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed - 2,
+          gravity: .10 + Math.random() * .10, size: 3 + Math.random() * 6,
+          rotation: Math.random() * 6, spin: (Math.random() - .5) * .3,
           life: 100 + Math.random() * 80,
-          color: ["#ffd34f", "#fff3c0", "#ef4242",
-                  "#5be09a", "#c78cff", "#ffffff"][
-                    Math.floor(Math.random() * 6)
-                  ]
+          color: ["#ffd34f","#fff3c0","#ef4242","#5be09a","#c78cff","#ffffff"][Math.floor(Math.random() * 6)]
         });
       }
     }
-
     function launchFirework() {
-      const x = window.innerWidth * (0.12 + Math.random() * 0.76);
-      const y = window.innerHeight * (0.12 + Math.random() * 0.50);
-      const colors = ["#ffd34f", "#ffffff", "#ff5e62", "#83ffbf"];
+      const x = window.innerWidth * (.12 + Math.random() * .76);
+      const y = window.innerHeight * (.12 + Math.random() * .50);
+      const colors = ["#ffd34f","#ffffff","#ff5e62","#83ffbf"];
       const color = colors[Math.floor(Math.random() * colors.length)];
-
       for (let i = 0; i < 48; i++) {
         const angle = (Math.PI * 2 * i) / 48;
         const speed = 1.2 + Math.random() * 4.3;
-
-        fireworks.push({
-          x, y,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed,
-          color,
-          life: 45 + Math.random() * 25
-        });
+        fireworks.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,color,life:45+Math.random()*25});
       }
-
       playFireworkSound();
     }
-
     function animateCelebration() {
       if (!celebrationRunning) return;
-
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-
       particles = particles.filter(p => p.life > 0);
       for (const p of particles) {
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vy += p.gravity;
-        p.vx *= 0.99;
-        p.rotation += p.spin;
-        p.life--;
-
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.rotation);
-        ctx.fillStyle = p.color;
-        ctx.globalAlpha = Math.min(1, p.life / 25);
-        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.65);
-        ctx.restore();
+        p.x += p.vx; p.y += p.vy; p.vy += p.gravity;
+        p.vx *= .99; p.rotation += p.spin; p.life--;
+        ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rotation);
+        ctx.fillStyle = p.color; ctx.globalAlpha = Math.min(1,p.life/25);
+        ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*.65); ctx.restore();
       }
-
       fireworks = fireworks.filter(p => p.life > 0);
       for (const p of fireworks) {
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vx *= 0.985;
-        p.vy *= 0.985;
-        p.life--;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-        ctx.globalAlpha = Math.min(1, p.life / 20);
-        ctx.fillStyle = p.color;
-        ctx.fill();
+        p.x += p.vx; p.y += p.vy; p.vx *= .985; p.vy *= .985; p.life--;
+        ctx.beginPath(); ctx.arc(p.x,p.y,2,0,Math.PI*2);
+        ctx.globalAlpha = Math.min(1,p.life/20); ctx.fillStyle = p.color; ctx.fill();
       }
-
       ctx.globalAlpha = 1;
       animationFrame = requestAnimationFrame(animateCelebration);
     }
-
     function startCelebration() {
-      celebrationRunning = true;
-      particles = [];
-      fireworks = [];
-
-      burstConfetti(window.innerWidth / 2, window.innerHeight * 0.35, 160);
-      launchFirework();
-      setTimeout(launchFirework, 450);
-      setTimeout(launchFirework, 1000);
+      celebrationRunning = true; particles = []; fireworks = [];
+      burstConfetti(window.innerWidth/2,window.innerHeight*.35,160);
+      launchFirework(); setTimeout(launchFirework,450); setTimeout(launchFirework,1000);
       setTimeout(() => {
-        if (celebrationRunning) {
-          burstConfetti(window.innerWidth / 2, window.innerHeight * 0.25, 100);
-        }
-      }, 650);
-
-      playWinningJingle();
-      animateCelebration();
+        if (celebrationRunning) burstConfetti(window.innerWidth/2,window.innerHeight*.25,100);
+      },650);
+      playWinningJingle(); animateCelebration();
     }
-
     function stopCelebration() {
       celebrationRunning = false;
       if (animationFrame) cancelAnimationFrame(animationFrame);
       animationFrame = null;
-      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-      particles = [];
-      fireworks = [];
+      ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+      particles = []; fireworks = [];
     }
-
     function showPrize(prizeName, phoneNumber, eligibilityCode) {
       document.getElementById("prizeName").textContent = prizeName;
       document.getElementById("winnerPhone").textContent = phoneNumber;
       document.getElementById("winnerCode").textContent = eligibilityCode;
-
       modal.classList.add("show");
       startCelebration();
-
       document.getElementById("closeModal").focus();
     }
-
     document.getElementById("closeModal").addEventListener("click", () => {
       modal.classList.remove("show");
       stopCelebration();
     });
 
-    // Keep the actual prize server-controlled. The wheel is only visual.
-    form.addEventListener("submit", async (event) => {
+    form.addEventListener("submit", async event => {
       event.preventDefault();
       if (spinning) return;
-
       const phoneNumber = phoneInput.value.trim();
       const eligibilityCode = codeInput.value.trim().toUpperCase();
 
       if (!/^[6-9]\d{9}$/.test(phoneNumber)) {
         showError("Please enter a valid 10-digit Indian mobile number.");
-        phoneInput.focus();
-        return;
+        phoneInput.focus(); return;
       }
-
       if (!/^DMFS\d{3}$/.test(eligibilityCode)) {
         showError("Please enter a valid eligibility code provided by the cashier.");
-        codeInput.focus();
-        return;
+        codeInput.focus(); return;
       }
 
       spinning = true;
@@ -761,40 +456,27 @@
       spinButton.textContent = "THE WHEEL IS SPINNING...";
       message.className = "message";
 
-      // Audio starts after the customer's click to respect browser rules.
-      try {
-        await prepareAudio();
-      } catch {
-        // The game can continue silently if audio is unavailable.
-      }
-
+      try { await prepareAudio(); } catch {}
       startSpinSound();
-
       rotation += 1800 + Math.floor(Math.random() * 1440);
       wheel.style.transform = `rotate(${rotation}deg)`;
-
       let requestSucceeded = false;
 
       try {
         const response = await fetch(API_URL + "/spin", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ phoneNumber, eligibilityCode })
+          headers: {"Content-Type":"application/json"},
+          body: JSON.stringify({phoneNumber, eligibilityCode})
         });
-
         let data;
-        try {
-          data = await response.json();
-        } catch {
-          throw new Error("Invalid server response. Please contact the cashier.");
-        }
+        try { data = await response.json(); }
+        catch { throw new Error("Invalid server response. Please contact the cashier."); }
 
         if (!response.ok || !data.ok) {
           stopSpinSound();
           showError(data.error || "Your spin could not be completed.");
           return;
         }
-
         if (!data.prize || !data.prize.name) {
           stopSpinSound();
           showError("Your result needs to be checked with the cashier. Please do not spin again.");
@@ -802,27 +484,17 @@
         }
 
         requestSucceeded = true;
-
-        // Let the wheel animation finish before the dramatic reveal.
-        await new Promise(resolve => setTimeout(resolve, 4300));
-
+        await new Promise(resolve => setTimeout(resolve,4300));
         stopSpinSound();
-        showPrize(data.prize.name, phoneNumber, eligibilityCode);
-
+        showPrize(data.prize.name,phoneNumber,eligibilityCode);
         spinButton.textContent = "SPIN COMPLETED";
         phoneInput.readOnly = true;
         codeInput.readOnly = true;
-
       } catch (error) {
         stopSpinSound();
-
-        showError(
-          error.message ||
-          "Unable to connect. Check your internet and contact the cashier before retrying."
-        );
+        showError(error.message || "Unable to connect. Check your internet and contact the cashier before retrying.");
       } finally {
         spinning = false;
-
         if (!requestSucceeded) {
           spinButton.disabled = false;
           spinButton.textContent = "🎁 TRY YOUR LUCK!";
@@ -830,7 +502,6 @@
       }
     });
 
-    // Stop effects if the customer closes the page or changes visibility.
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) stopSpinSound();
     });
